@@ -1,9 +1,9 @@
 {
-  "name": "helios-finance",
+  "name": "nife-finance",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Helios Finance - Aplikasi Manajemen Keuangan Pribadi (React + Vite + Tailwind + Supabase)",
+  "description": "nife Finance - Aplikasi Manajemen Keuangan Pribadi (React + Vite + Tailwind + Supabase)",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
