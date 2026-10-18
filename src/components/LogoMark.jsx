@@ -1,4 +1,4 @@
-/** Ikon brand geometris minimalis (putih) untuk Helios Finance. */
+/** Ikon brand geometris minimalis (putih) untuk Nife Finance. */
 export default function LogoMark({ className = 'h-5 w-5' }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">

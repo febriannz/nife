@@ -15,4 +15,9 @@ export const CATEGORY_META = {
   Gaji: { icon: Briefcase, budget: 0 },
 }
 
+/** Kuota anggaran default per kategori — dipakai sampai user mengubahnya sendiri. */
+export const DEFAULT_BUDGETS = Object.fromEntries(
+  EXPENSE_CATEGORIES.map((c) => [c, CATEGORY_META[c].budget]),
+)
+
 export const CHART_RANGES = ['1D', '1W', '1M', '6M', '1Y']

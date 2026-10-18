@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "nife Finance - Aplikasi Manajemen Keuangan Pribadi (React + Vite + Tailwind + Supabase)",
+  "description": "Nife Finance - Aplikasi Manajemen Keuangan Pribadi (React + Vite + Tailwind + Supabase)",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

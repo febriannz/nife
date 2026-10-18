@@ -1,8 +1,8 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, SlidersHorizontal } from 'lucide-react'
 import { CATEGORY_META } from '../lib/constants'
-import { formatCompactIDR, formatPct } from '../lib/format'
+import { formatCompactIDR, formatIDR, formatPct } from '../lib/format'
 
-export default function BudgetCard({ boxes, forwardedRef }) {
+export default function BudgetCard({ boxes, onEdit, forwardedRef }) {
   return (
     <section
       ref={forwardedRef}
@@ -11,10 +11,18 @@ export default function BudgetCard({ boxes, forwardedRef }) {
       <div className="flex items-center justify-between gap-2">
         <h2 className="text-[13.5px] font-semibold text-[#F4EFF6]">Alokasi Anggaran</h2>
         <div className="flex items-center gap-1.5">
-          <button className="rounded-full border border-[#26202B] bg-[#161219] px-3.5 py-1.5 text-[10.5px] font-medium text-[#C8C2CC] transition hover:text-white">
-            See all
+          <button
+            onClick={onEdit}
+            className="flex items-center gap-1.5 rounded-full border border-[#26202B] bg-[#161219] px-3.5 py-1.5 text-[10.5px] font-medium text-[#C8C2CC] transition hover:border-[#3A2F3E] hover:text-white"
+          >
+            <SlidersHorizontal size={11} className="text-[#C89BBF]" />
+            Atur
           </button>
-          <button className="grid h-8 w-8 place-items-center rounded-full border border-[#26202B] bg-[#161219] text-[#C8C2CC] transition hover:text-white">
+          <button
+            onClick={onEdit}
+            title="Atur anggaran bulanan"
+            className="grid h-8 w-8 place-items-center rounded-full border border-[#26202B] bg-[#161219] text-[#C8C2CC] transition hover:border-[#3A2F3E] hover:text-white"
+          >
             <ArrowUpRight size={14} />
           </button>
         </div>
@@ -27,6 +35,7 @@ export default function BudgetCard({ boxes, forwardedRef }) {
           return (
             <div
               key={b.category}
+              title={`Kuota ${formatIDR(b.budget)} • terpakai ${formatIDR(b.spent)}`}
               className="flex flex-col justify-between rounded-2xl border border-[#26202B] bg-[#161219] p-3.5"
             >
               <div>

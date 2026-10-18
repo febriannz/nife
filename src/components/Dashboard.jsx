@@ -1,10 +1,12 @@
 import { useMemo, useRef, useState } from 'react'
 import { useTransactions } from '../hooks/useTransactions'
+import { useBudgets } from '../hooks/useBudgets'
 import { isSupabaseConfigured } from '../lib/supabase'
 import { buildChartData, computeBudgetBoxes, computeTotals } from '../lib/stats'
 import AddTransactionModal from './AddTransactionModal'
 import AllTransactionsModal from './AllTransactionsModal'
 import BudgetCard from './BudgetCard'
+import BudgetModal from './BudgetModal'
 import CashFlowCard from './CashFlowCard'
 import ControlRow from './ControlRow'
 import Header from './Header'
@@ -16,6 +18,7 @@ import TransactionsCard from './TransactionsCard'
 
 export default function Dashboard({ user, onSignOut }) {
   const { rows, loading, isFallback, addTransaction, deleteTransaction } = useTransactions(user)
+  const { budgets: budgetLimits, saveBudgets } = useBudgets(user?.id)
 
   const [search, setSearch] = useState('')
   const [quickTab, setQuickTab] = useState('Dompet')
@@ -24,6 +27,7 @@ export default function Dashboard({ user, onSignOut }) {
   const [activeNav, setActiveNav] = useState('Dashboard')
   const [addOpen, setAddOpen] = useState(false)
   const [allTransactionsOpen, setAllTransactionsOpen] = useState(false)
+  const [budgetModalOpen, setBudgetModalOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [supportOpen, setSupportOpen] = useState(false)
 
@@ -33,7 +37,7 @@ export default function Dashboard({ user, onSignOut }) {
   const chartRef = useRef(null)
 
   const totals = useMemo(() => computeTotals(rows), [rows])
-  const budgets = useMemo(() => computeBudgetBoxes(rows), [rows])
+  const budgetBoxes = useMemo(() => computeBudgetBoxes(rows, budgetLimits), [rows, budgetLimits])
   const chartData = useMemo(() => buildChartData(rows, range), [rows, range])
 
   const filteredRows = useMemo(() => {
@@ -112,7 +116,11 @@ export default function Dashboard({ user, onSignOut }) {
             </div>
 
             <div className="flex md:col-span-1 xl:col-span-4">
-              <BudgetCard forwardedRef={budgetRef} boxes={budgets} />
+              <BudgetCard
+                forwardedRef={budgetRef}
+                boxes={budgetBoxes}
+                onEdit={() => setBudgetModalOpen(true)}
+              />
             </div>
           </div>
 
@@ -129,6 +137,13 @@ export default function Dashboard({ user, onSignOut }) {
         onDelete={deleteTransaction}
       />
 
+      <BudgetModal
+        open={budgetModalOpen}
+        onClose={() => setBudgetModalOpen(false)}
+        budgets={budgetLimits}
+        onSave={saveBudgets}
+      />
+
       <InfoModal open={settingsOpen} onClose={() => setSettingsOpen(false)} title="Settings">
         <ul className="space-y-2">
           <li>
@@ -139,8 +154,9 @@ export default function Dashboard({ user, onSignOut }) {
             {isSupabaseConfigured ? 'Supabase (real-time)' : 'Mode Demo (lokal)'}
           </li>
           <li>
-            <span className="text-[#7A7080]">Anggaran bulanan:</span> Makan Rp 2,5jt • Transport Rp 1,5jt •
-            Kebutuhan Rp 3jt • Hiburan Rp 900rb
+            <span className="text-[#7A7080]">Anggaran bulanan:</span> bisa diubah lewat tombol{' '}
+            <span className="text-[#C89BBF]">Atur</span> di kartu Alokasi Anggaran (tersimpan per akun
+            di perangkat ini)
           </li>
         </ul>
       </InfoModal>

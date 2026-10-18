@@ -47,7 +47,7 @@ export default function Sidebar({ active, onNavigate, onSettings, onSupport, onL
       <div>
         <div className="flex items-center gap-2.5 px-1">
           <LogoMark className="h-5 w-5 text-[#F4EFF6]" />
-          <span className="text-[15px] font-semibold tracking-tight text-[#F4EFF6]">Helios Finance</span>
+          <span className="text-[15px] font-semibold tracking-tight text-[#F4EFF6]">Nife Finance</span>
         </div>
 
         <nav className="mt-8 flex flex-col gap-1.5">

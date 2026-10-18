@@ -1,8 +1,8 @@
-# Helios Finance — Manajemen Keuangan Pribadi
+# Nife Finance — Manajemen Keuangan Pribadi
 
 Full-stack SPA (Single Page Application) untuk manajemen keuangan pribadi, dibangun mengikuti
 spesifikasi `@promt.md` dan tata letak visual 100% mengacu pada referensi desain `@ref-ui.jpg`
-(gaya "Helios Investments" — dark mode ultra-gelap dengan aksen dusty mauve / smoky plum).
+(dark mode ultra-gelap dengan aksen dusty mauve / smoky plum).
 
 ## ✦ Teknologi
 
@@ -18,7 +18,8 @@ spesifikasi `@promt.md` dan tata letak visual 100% mengacu pada referensi desain
 - **CRUD transaksi real-time** pada tabel `transactions` (tambah lewat modal, hapus saat hover)
 - **Total Saldo** dihitung otomatis dari pemasukan − pengeluaran
 - **Transaksi Terakhir** dengan filter `Semua / Pemasukan / Pengeluaran` + pencarian real-time
-- **Alokasi Anggaran 2×2** (Makan, Transport, Kebutuhan, Hiburan) dengan indikator sisa/lebih kuota
+- **Alokasi Anggaran 2×2** (Makan, Transport, Kebutuhan, Hiburan) dengan indikator sisa/lebih kuota,
+  dan kuota bisa **diatur sendiri** lewat tombol *Atur* (tersimpan per akun di perangkat)
 - **Grafik Arus Kas Bulanan** (Recharts AreaChart) dengan filter `1D 1W 1M 6M 1Y`,
   tooltip melayang, dot bercahaya, dan garis putus-putus saat hover
 - **Fallback dummy data** otomatis bila database masih kosong, agar tampilan tetap hidup

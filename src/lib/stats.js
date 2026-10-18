@@ -27,8 +27,8 @@ export function computeMonthlyTotals(rows, ref = new Date()) {
   return { income, expense }
 }
 
-/** Grid 2x2 Alokasi Anggaran untuk bulan berjalan. */
-export function computeBudgetBoxes(rows, ref = new Date()) {
+/** Grid 2x2 Alokasi Anggaran untuk bulan berjalan (kuota bisa dikustom user). */
+export function computeBudgetBoxes(rows, budgets = {}, ref = new Date()) {
   return EXPENSE_CATEGORIES.map((category) => {
     const monthRows = rows.filter(
       (r) =>
@@ -37,7 +37,7 @@ export function computeBudgetBoxes(rows, ref = new Date()) {
         isSameMonth(new Date(r.created_at), ref),
     )
     const spent = monthRows.reduce((acc, r) => acc + num(r.amount), 0)
-    const budget = CATEGORY_META[category]?.budget ?? 0
+    const budget = Number(budgets[category] ?? CATEGORY_META[category]?.budget ?? 0)
     const remaining = budget - spent
     const remainingPct = budget > 0 ? (remaining / budget) * 100 : 0
     return { category, spent, budget, remainingPct, count: monthRows.length }
